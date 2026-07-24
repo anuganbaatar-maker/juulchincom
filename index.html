@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juulchin.com — SEO Аудит ба Техникийн Зөвлөмж</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0C1633; --ink2:#14224A; --ink3:#1E3266;
+    --steppe:#2E9E6B; --gold:#E9A73C; --coral:#E85541; --sky:#4A7DD4;
+    --paper:#F6F5F0; --card:#FFFFFF; --slate:#22283A; --muted:#6E7686; --line:#E7E3D8;
+    --shadow:0 18px 50px -24px rgba(12,22,51,.45);
+    --shadow-sm:0 8px 24px -14px rgba(12,22,51,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',system-ui,sans-serif;
+    background:var(--paper); color:var(--slate);
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,.disp{font-family:'Unbounded',sans-serif;letter-spacing:-.01em}
+  .mono{font-family:'JetBrains Mono',monospace}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;color:#fff;overflow:hidden;
+    background:radial-gradient(120% 100% at 80% -10%,#22417f 0%,var(--ink2) 42%,var(--ink) 100%);
+    padding:92px 0 120px;
+  }
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:-1px;height:120px;
+    background:linear-gradient(180deg,transparent,var(--paper));
+  }
+  .stars{position:absolute;inset:0;opacity:.5}
+  .stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw 4s infinite ease-in-out}
+  @keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#9FC4FF;
+    border:1px solid rgba(159,196,255,.35);padding:7px 14px;border-radius:999px;
+    background:rgba(159,196,255,.08);
+  }
+  .hero h1{font-size:clamp(34px,6vw,64px);font-weight:800;line-height:1.02;margin:26px 0 18px;max-width:16ch}
+  .hero h1 b{color:var(--gold);font-weight:800}
+  .hero p.lead{font-size:clamp(16px,2.1vw,20px);color:#C9D4EE;max-width:60ch}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:12px;
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+    font-size:13px;color:#E4EBFA;font-weight:600;
+  }
+  .chip .dot{width:8px;height:8px;border-radius:50%}
+
+  /* ---------- REVEAL ---------- */
+  .rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+
+  /* ---------- SECTION ---------- */
+  section{padding:72px 0}
+  .sec-head{display:flex;align-items:flex-start;gap:20px;margin-bottom:40px}
+  .sec-num{
+    font-family:'Unbounded';font-weight:800;font-size:15px;color:#fff;flex:none;
+    width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--ink3),var(--ink));box-shadow:var(--shadow-sm);
+  }
+  .sec-head h2{font-size:clamp(24px,3.6vw,36px);font-weight:800;line-height:1.08;color:var(--ink)}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:66ch;font-size:15.5px}
+
+  /* ---------- GAUGES ---------- */
+  .score-top{
+    display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:24px;padding:40px;box-shadow:var(--shadow)
+  }
+  .big-gauge{position:relative;width:200px;height:200px}
+  .big-gauge svg{transform:rotate(-90deg)}
+  .big-gauge .lbl{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+  .big-gauge .lbl .n{font-family:'Unbounded';font-weight:800;font-size:46px;color:var(--ink);line-height:1}
+  .big-gauge .lbl .t{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:6px}
+  .bars{display:flex;flex-direction:column;gap:16px}
+  .bar-row{display:grid;grid-template-columns:180px 1fr 44px;align-items:center;gap:14px}
+  .bar-row .name{font-weight:700;font-size:14.5px}
+  .bar-track{height:12px;border-radius:99px;background:#EEEBE1;overflow:hidden}
+  .bar-fill{height:100%;border-radius:99px;width:0;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+  .bar-row .val{font-family:'JetBrains Mono';font-weight:700;font-size:14px;text-align:right}
+
+  /* ---------- STAT STRIP ---------- */
+  .stat-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:24px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;box-shadow:var(--shadow-sm)}
+  .stat .v{font-family:'Unbounded';font-weight:800;font-size:26px;color:var(--ink)}
+  .stat .k{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:4px}
+  .stat.flag{border-color:#F3C9C1;background:#FFF6F4}
+  .stat.flag .v{color:var(--coral)}
+
+  /* ---------- TWO COLUMN good/bad ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow-sm)}
+  .panel h3{font-size:17px;display:flex;align-items:center;gap:10px;margin-bottom:16px;font-weight:700}
+  .panel h3 .badge{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:15px;flex:none}
+  .lst{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .lst li{position:relative;padding-left:26px;font-size:14.5px;color:#3a4152}
+  .lst li::before{position:absolute;left:0;top:1px;font-size:14px}
+  .good li::before{content:"✓";color:var(--steppe);font-weight:800}
+  .bad li::before{content:"!";color:var(--coral);font-weight:800;left:6px}
+  .lst li b{color:var(--ink)}
+
+  /* ---------- TECH CARDS ---------- */
+  .tcard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:0;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:26px}
+  .tcard-head{display:flex;gap:18px;align-items:center;padding:26px 28px;background:linear-gradient(180deg,#FBFAF6,#fff);border-bottom:1px solid var(--line)}
+  .tcard-ic{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:26px;flex:none;color:#fff}
+  .tcard-head h3{font-size:19px;font-weight:800;color:var(--ink)}
+  .tcard-head .sub{font-size:13px;color:var(--muted);font-weight:600;margin-top:2px}
+  .tcard-body{padding:26px 28px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .tcard-body.solo{grid-template-columns:1fr}
+  .block-lbl{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .block-lbl::before{content:"";width:14px;height:2px;background:var(--gold);display:inline-block}
+  .prob{color:#4a4030}
+  .prob .h{color:var(--coral)}
+  .fix{color:#274a37}
+  .fix .h{color:var(--steppe)}
+  .tcard-body p{font-size:14.5px;color:#3a4152}
+  .tcard-body ul{margin:10px 0 0 0;padding-left:18px;display:flex;flex-direction:column;gap:7px}
+  .tcard-body li{font-size:14px;color:#3a4152}
+  .tcard-body li b{color:var(--ink)}
+
+  /* mapping table */
+  .maptbl{width:100%;border-collapse:collapse;margin-top:6px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  .maptbl th,.maptbl td{padding:11px 13px;font-size:13px;text-align:left;border-bottom:1px solid var(--line)}
+  .maptbl th{background:#F3F1EA;font-weight:700;color:var(--ink);font-size:12px;letter-spacing:.03em}
+  .maptbl td .ok{color:var(--steppe);font-weight:700}
+  .maptbl td .no{color:var(--coral);font-weight:700}
+  .maptbl tr:last-child td{border-bottom:none}
+
+  /* ---------- SERP demo ---------- */
+  .serp-wrap{background:#F1F3F6;border:1px solid #E1E5EC;border-radius:16px;padding:18px 18px 20px}
+  .serp-toggles{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .tg{font-size:12px;font-weight:700;padding:7px 12px;border-radius:9px;border:1px solid #cfd6e0;background:#fff;cursor:pointer;color:#3a4152;transition:.2s}
+  .tg.active{background:var(--ink3);color:#fff;border-color:var(--ink3)}
+  .serp{background:#fff;border-radius:10px;padding:16px 18px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+  .serp .fav{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .serp .fav .f{width:26px;height:26px;border-radius:50%;background:#e8eef9;display:grid;place-items:center;font-size:13px}
+  .serp .fav .site{font-size:12.5px;color:#202124;font-weight:600;line-height:1.1}
+  .serp .fav .u{font-size:12px;color:#5f6368}
+  .serp .stitle{color:#1a0dab;font-size:19px;line-height:1.3;margin:2px 0 3px;font-weight:400;font-family:arial,sans-serif}
+  .serp .sdesc{color:#4d5156;font-size:13.5px;line-height:1.55;font-family:arial,sans-serif}
+  .serp-note{font-size:12px;color:var(--muted);margin-top:12px;font-style:italic}
+
+  /* callout */
+  .callout{border-radius:16px;padding:20px 22px;margin-top:22px;border:1px solid;display:flex;gap:14px}
+  .callout .ci{font-size:22px;flex:none}
+  .callout.warn{background:#FFF8EC;border-color:#F1D79B}
+  .callout.warn .ci{color:var(--gold)}
+  .callout.warn h4{color:#8a6410}
+  .callout.info{background:#EEF4FF;border-color:#C6D8F6}
+  .callout.info .ci{color:var(--sky)}
+  .callout h4{font-size:14.5px;font-weight:800;margin-bottom:5px}
+  .callout p{font-size:13.5px;color:#4a4a4a}
+
+  /* ---------- OFFPAGE ---------- */
+  .off-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .off{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+  .off:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  .off .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:24px;margin-bottom:16px;color:#fff}
+  .off h3{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:8px}
+  .off p{font-size:14px;color:#3a4152}
+  .off .tag{position:absolute;top:20px;right:20px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:8px}
+  .off .tag.free{background:#E4F5EC;color:var(--steppe)}
+  .off .tag.paid{background:#FDECE9;color:var(--coral)}
+
+  /* ---------- ROADMAP ---------- */
+  .road{display:flex;flex-direction:column;gap:0;position:relative;margin-top:8px}
+  .road::before{content:"";position:absolute;left:26px;top:14px;bottom:14px;width:2px;background:linear-gradient(var(--steppe),var(--gold),var(--coral))}
+  .step{display:grid;grid-template-columns:54px 1fr;gap:20px;padding:16px 0;align-items:start}
+  .step .knob{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:'Unbounded';font-weight:800;font-size:14px;z-index:1;box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;box-shadow:var(--shadow-sm)}
+  .step .body .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .step .body h3{font-size:16px;font-weight:800;color:var(--ink)}
+  .step .body .when{font-family:'JetBrains Mono';font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:8px;background:#F1F3F6;color:var(--muted)}
+  .step .body p{font-size:13.5px;color:#3a4152}
+
+  /* ---------- FINAL ---------- */
+  .final{background:radial-gradient(120% 120% at 20% 0%,#22417f,var(--ink2) 50%,var(--ink));color:#fff;border-radius:26px;padding:48px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .final h2{color:#fff;font-size:clamp(22px,3.4vw,32px);margin-bottom:16px;max-width:20ch}
+  .final p{color:#C9D4EE;font-size:16px;max-width:64ch}
+  .final .kbox{display:flex;gap:20px;flex-wrap:wrap;margin-top:28px}
+  .final .k{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:18px 22px;flex:1;min-width:200px}
+  .final .k .kt{font-family:'Unbounded';font-weight:800;color:var(--gold);font-size:15px;margin-bottom:6px}
+  .final .k p{font-size:13.5px;color:#D5DEF0}
+
+  footer{text-align:center;padding:50px 24px 60px;color:var(--muted);font-size:13px}
+  footer b{color:var(--ink)}
+
+  @media(max-width:860px){
+    .score-top{grid-template-columns:1fr;gap:30px;justify-items:center}
+    .bars{width:100%}
+    .stat-strip{grid-template-columns:repeat(3,1fr)}
+    .split,.tcard-body,.off-grid{grid-template-columns:1fr}
+    .bar-row{grid-template-columns:120px 1fr 40px}
+  }
+  @media(max-width:520px){
+    .stat-strip{grid-template-columns:repeat(2,1fr)}
+    .hero{padding:64px 0 90px}
+    section{padding:52px 0}
+    .sec-head{gap:14px}
+    .final{padding:32px 24px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+    .stars i{animation:none}
+    .bar-fill{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="stars" id="stars"></div>
+  <div class="wrap">
+    <span class="eyebrow">SEO Аудит · Дижитал Инновац</span>
+    <h1>Juulchin.com сайтын <b>SEO аудит</b> ба техникийн зөвлөмж</h1>
+    <p class="lead">Seobility болон SEO Pro (MarketingSyrup) хэрэгслээр хийсэн аудитын дүн, түүнчлэн технологийн багаас засаж болох бодит ажлууд, вэбээс гадуурх (off-page) стратегийн санал.</p>
+    <div class="hero-meta">
+      <span class="chip"><span class="dot" style="background:var(--gold)"></span> juulchin.com</span>
+      <span class="chip"><span class="dot" style="background:var(--steppe)"></span> Аудит: 2026-07-24</span>
+      <span class="chip"><span class="dot" style="background:var(--sky)"></span> Seobility · SEO Pro · SIRO</span>
+      <span class="chip"><span class="dot" style="background:#C9D4EE"></span> Он-page оноо: 81%</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== 01 ЕРӨНХИЙ ҮНЭЛГЭЭ ===================== -->
+<section id="score">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num">01</div>
+      <div>
+        <h2>Ерөнхий үнэлгээ</h2>
+        <p>Seobility-ийн он-page оноо <b>81% (Good)</b>. Хамгийн доогуур үзүүлэлт нь <b>Линкийн бүтэц (25%)</b>, дараа нь <b>Бусад / гарчгийн бүтэц (62%)</b>. Meta болон Server тал нь эрүүл.</p>
+      </div>
+    </div>
+
+    <div class="score-top rv">
+      <div class="big-gauge">
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="86" fill="none" stroke="#EEEBE1" stroke-width="18"/>
+          <circle id="mainarc" cx="100" cy="100" r="86" fill="none" stroke="url(#gg)" stroke-width="18"
+                  stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="540"/>
+          <defs>
+            <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2E9E6B"/><stop offset="1" stop-color="#E9A73C"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="lbl"><div class="n" data-count="81">0</div><div class="t">On-page оноо</div></div>
+      </div>
+      <div class="bars">
+        <div class="bar-row"><span class="name">Meta мэдээлэл</span><div class="bar-track"><div class="bar-fill" data-w="80" style="background:linear-gradient(90deg,#2E9E6B,#5cc48f)"></div></div><span class="val">80%</span></div>
+        <div class="bar-row"><span class="name">Хуудасны чанар</span><div class="bar-track"><div class="bar-fill" data-w="89" style="background:linear-gradient(90deg,#2E9E6B,#5cc48f)"></div></div><span class="val">89%</span></div>
+        <div class="bar-row"><span class="name">Server тохиргоо</span><div class="bar-track"><div class="bar-fill" data-w="90" style="background:linear-gradient(90deg,#2E9E6B,#5cc48f)"></div></div><span class="val">90%</span></div>
+        <div class="bar-row"><span class="name">Гадаад хүчин зүйл</span><div class="bar-track"><div class="bar-fill" data-w="84" style="background:linear-gradient(90deg,#2E9E6B,#5cc48f)"></div></div><span class="val">84%</span></div>
+        <div class="bar-row"><span class="name">Бусад (гарчиг)</span><div class="bar-track"><div class="bar-fill" data-w="62" style="background:linear-gradient(90deg,#E9A73C,#f0c06e)"></div></div><span class="val">62%</span></div>
+        <div class="bar-row"><span class="name">Линкийн бүтэц</span><div class="bar-track"><div class="bar-fill" data-w="25" style="background:linear-gradient(90deg,#E85541,#f0836f)"></div></div><span class="val">25%</span></div>
+      </div>
+    </div>
+
+    <div class="stat-strip rv">
+      <div class="stat flag"><div class="v" data-count="70">0</div><div class="k">Title тэмдэгт ⚠</div></div>
+      <div class="stat"><div class="v" data-count="109">0</div><div class="k">Description ✓</div></div>
+      <div class="stat"><div class="v" data-count="1616">0</div><div class="k">Нийт үг</div></div>
+      <div class="stat"><div class="v" data-count="31">0</div><div class="k">Зураг</div></div>
+      <div class="stat"><div class="v" data-count="62">0</div><div class="k">Линк</div></div>
+      <div class="stat"><div class="v" data-count="46">0</div><div class="k">Гарчиг (H)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 ДҮГНЭЛТ ===================== -->
+<section id="findings" style="background:#FBFAF6;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num">02</div>
+      <div>
+        <h2>Аудитын дүгнэлт</h2>
+        <p>Техникийн суурь тохиргоо (SEO) нь ерөнхийдөө зөв ажиллаж байна. Гол сул тал нь линкийн бүтэц, зургийн alt текст, контентийн хэмжээ болон гарчгийн урттай холбоотой.</p>
+      </div>
+    </div>
+    <div class="split">
+      <div class="panel rv">
+        <h3><span class="badge" style="background:var(--steppe)">✓</span> Сайн байгаа тал</h3>
+        <ul class="lst good">
+          <li><b>Индексжих боломжтой</b> — meta robots: indexable, canonical зөв тохирсон.</li>
+          <li><b>Description төгс</b> — 109 тэмдэгт, 989/1000 пиксел урттай.</li>
+          <li><b>Server хурд сайн</b> — хариу өгөх хугацаа 0.09 сек, HTML хэмжээ бага.</li>
+          <li><b>HTTPS + HTTP/2</b> — холболт хамгаалагдсан, шахагдсан дамжуулалт.</li>
+          <li><b>Backlink сайн</b> — гадны сайтуудаас олон домэйноос холбогдсон.</li>
+          <li><b>Mobile optimization</b> — viewport, media query бүрэн.</li>
+          <li><b>H1 ганц удаа</b>, typo алдаа илрээгүй.</li>
+        </ul>
+      </div>
+      <div class="panel rv">
+        <h3><span class="badge" style="background:var(--coral)">!</span> Анхаарах тал</h3>
+        <ul class="lst bad">
+          <li><b>Title 70 тэмдэгт</b> — зөвшөөрөгдөх урт (≈580px / ~60 тэмдэгт)-ээс хэтэрсэн, төгсгөл нь Google дээр таслагдаж мэднэ.</li>
+          <li><b>Линкийн бүтэц 25%</b> — зарим дотоод anchor хэт урт, dynamic параметртэй.</li>
+          <li><b>Зургийн alt текст дутуу</b> — хэсэг зургууд alt attribute-гүй (Image SEO).</li>
+          <li><b>Гарчгийн дараалал</b> — 46 гарчиг, текстийн хэмжээтэй харьцуулахад дэс дараалал сайжруулах шаардлагатай.</li>
+          <li><b>Bold/strong цөөн</b> — ердөө 5 (санал болгох нь ~30).</li>
+          <li><b>Social media 1</b> — нийгмийн сүлжээнд тохируулга дутуу.</li>
+          <li><b>Блог маш цөөн</b> — SIRO дээр ердөө 6 блог.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 ТЕХНИКЭЭС ЗАСАЖ БОЛОХ ===================== -->
+<section id="tech">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num">03</div>
+      <div>
+        <h2>Технологийн багаас засаж болох ажлууд</h2>
+        <p>Аудитын илэрцийг тодорхой асуудал → техникийн шийдэл болгон задаллаа. Эдгээр нь SIRO платформ дээр хийгдэх бодит хөгжүүлэлтүүд.</p>
+      </div>
+    </div>
+
+    <!-- 3.1 БЛОГ / GOOGLE-SEO ТОХИРГОО -->
+    <div class="tcard rv">
+      <div class="tcard-head">
+        <div class="tcard-ic" style="background:linear-gradient(135deg,var(--sky),#2f5fb0)">📝</div>
+        <div>
+          <h3>1 · Блог & SIRO Google-SEO талбарын тохиргоо</h3>
+          <div class="sub">Блогийн текст Google илэрцэд гарахгүй байгаа гол шалтгаан</div>
+        </div>
+      </div>
+      <div class="tcard-body">
+        <div>
+          <div class="block-lbl">Асуудал</div>
+          <p class="prob"><span class="h">SIRO дээр блог оруулахдаа</span> "Google – SEO" хэсгийн <b>Гарчиг / Тайлбар / Зураг</b>-ийг аль талбараас авахыг тодорхойлдог. Одоо энэ тохиргоо блог болгонд <b>жигд бус</b> байна:</p>
+          <table class="maptbl">
+            <tr><th>Талбар</th><th>Part 1</th><th>Part 2</th></tr>
+            <tr><td>Гарчиг</td><td class="ok">title ✓</td><td class="ok">title ✓</td></tr>
+            <tr><td>Тайлбар</td><td class="ok">Content ✓</td><td class="no">title ✗</td></tr>
+            <tr><td>Зураг</td><td class="ok">thumbnail ✓</td><td class="ok">thumbnail ✓</td></tr>
+          </table>
+          <p style="margin-top:12px">Part 2 дээр Тайлбар нь дахин <b>title</b>-аас уншигдаж байгаа тул meta description хоосон/давхардмал болж, Google-ийн робот блогийн бодит текстийг зөв индексжүүлэхгүй байна.</p>
+        </div>
+        <div>
+          <div class="block-lbl">Шийдэл — SERP урьдчилан харах</div>
+          <p class="fix"><span class="h">Технологийн багаас</span> SIRO дээр талбар сонгосны дараа <b>Google илэрц дээр яаж харагдахыг</b> шууд харуулах интерфэйс нэмж болно. Доорх toggle-ыг дараад ялгааг үзнэ үү:</p>
+          <div class="serp-wrap" style="margin-top:14px">
+            <div class="serp-toggles">
+              <button class="tg active" data-src="content" onclick="setSerp('content',this)">Тайлбар ← Content ✓</button>
+              <button class="tg" data-src="title" onclick="setSerp('title',this)">Тайлбар ← title ✗</button>
+            </div>
+            <div class="serp">
+              <div class="fav">
+                <div class="f">🏔️</div>
+                <div><div class="site">Juulchin Tourism</div><div class="u">https://juulchin.com › blog</div></div>
+              </div>
+              <div class="stitle">Arriving in Mongolia — Juulchin</div>
+              <div class="sdesc" id="serpDesc">After two flights and a Hong Kong layover, I find myself landing at Chinggis Khaan International Airport. Ulaanbaatar's new airport opened in 2021…</div>
+            </div>
+            <div class="serp-note" id="serpNote">✓ Content-аас авбал бодит блогийн текст илэрцэд гарч, хэрэглэгч юу байгааг ойлгоно.</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 28px 26px">
+        <div class="callout info">
+          <div class="ci">💡</div>
+          <div>
+            <h4>Нэмэлт: блогийн тоо</h4>
+            <p>Одоогоор ердөө 6 блог байгаа нь Google-д "хангалттай контенттой сайт" гэж танигдахад бага. Тогтмол (сард 2–4) чанартай блог нэмэх нь урт хугацаанд хамгийн найдвартай органик өсөлт өгнө.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.2 KEYWORD ТАЛБАР -->
+    <div class="tcard rv">
+      <div class="tcard-head">
+        <div class="tcard-ic" style="background:linear-gradient(135deg,var(--gold),#c9862a)">🔑</div>
+        <div>
+          <h3>2 · Keyword / сэдэвчилсэн талбар нэмэх</h3>
+          <div class="sub">"mongolia", "travel", "tour" гэх хайлтын түлхүүр үгсийг зорих</div>
+        </div>
+      </div>
+      <div class="tcard-body">
+        <div>
+          <div class="block-lbl">Санаа</div>
+          <p class="prob">Хүмүүсийн ихэвчлэн хайдаг <b>mongolia, travel, tour, gobi</b> гэх үгсийг блог болон хуудсанд нэмж, тэдгээр үгээр хайхад сайт олдох боломжийг нэмэгдүүлэх. SIRO дээр keyword оруулах тусгай талбар нээж өгч болно.</p>
+        </div>
+        <div>
+          <div class="block-lbl">Хэрэгжүүлэлт</div>
+          <ul>
+            <li><b>Харагдах tag/сэдвийн талбар</b> — блог доор "Холбоотой сэдэв" болгон гаргах.</li>
+            <li><b>Structured data (schema.org)</b> — Article, TouristTrip зэрэг разметка нэмбэл Google контентоо илүү сайн ойлгоно.</li>
+            <li>Keyword-ээ <b>гарчиг, эхний догол мөр, H2, alt текст</b>-т байгалиасаа шингээх.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="padding:0 28px 26px">
+        <div class="callout warn">
+          <div class="ci">⚠️</div>
+          <div>
+            <h4>Санамж — "нуугдмал текст"-ээс болгоомжил</h4>
+            <p>Хэрэглэгчид харагдахгүй, зөвхөн роботод уншигддаг нуугдмал keyword (hidden text / keyword stuffing) нь Google-ийн журам <b>шууд зөрчдөг</b> бөгөөд сайтыг доош унагах эсвэл индексээс хасах шийтгэл (penalty) авах эрсдэлтэй. Тиймээс дээрх <b>харагдах, утга зүйтэй</b> хувилбарыг сонгох нь урт хугацаанд аюулгүй, үр дүнтэй. (Meta keywords tag-ыг Google аль хэдийн үл тоомсорлодог.)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.3 ALT TEXT -->
+    <div class="tcard rv">
+      <div class="tcard-head">
+        <div class="tcard-ic" style="background:linear-gradient(135deg,var(--steppe),#1f7a51)">🖼️</div>
+        <div>
+          <h3>3 · Зургийн Alt текст талбар нээх</h3>
+          <div class="sub">Image SEO — одоо олон зураг alt attribute-гүй</div>
+        </div>
+      </div>
+      <div class="tcard-body">
+        <div>
+          <div class="block-lbl">Асуудал</div>
+          <p class="prob">Аудитаар зургуудад <b>alt текст байхгүй</b> байгааг илрүүлсэн. Alt текст нь Google Image хайлтад орох, хандалтын хялбар байдал (accessibility)-д чухал.</p>
+        </div>
+        <div>
+          <div class="block-lbl">Шийдэл</div>
+          <p class="fix">SIRO-ийн зураг оруулах цонхонд <b>Alt текст оруулах талбар</b> нэмж, контент бичигч зураг бүрд богино тайлбар (ж: "Mongolia horseback riding in the steppe") бичдэг болгох.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.4 ЗУРГИЙН ХЭМЖЭЭ -->
+    <div class="tcard rv">
+      <div class="tcard-head">
+        <div class="tcard-ic" style="background:linear-gradient(135deg,#8a5cf0,#6a3fd0)">⚡</div>
+        <div>
+          <h3>4 · Зургийн хэмжээ / performance оптимизаци</h3>
+          <div class="sub">WebP ашиглаж байгаа ч эх файлын хэмжээ хэт том</div>
+        </div>
+      </div>
+      <div class="tcard-body">
+        <div>
+          <div class="block-lbl">Асуудал</div>
+          <p class="prob">Зургийг хурдан ачаалахын тулд <b>WebP</b> форматаар харуулж байгаа боловч эх зургуудын хэмжээ <span class="h">хэтэрхий том</span>. Энэ нь Web Vitals (LCP)-т сөргөөр нөлөөлнө — аудитад "No info available" гэж гарсан ч бодит хурдны эрсдэл.</p>
+        </div>
+        <div>
+          <div class="block-lbl">Шийдэл</div>
+          <ul>
+            <li>Upload үед автомат <b>resize + compress</b> (ж: өргөн 1600–1920px дээд хязгаар).</li>
+            <li><b>srcset / responsive images</b> — төхөөрөмжийн дэлгэцэд тохирсон хэмжээ дамжуулах.</li>
+            <li><b>lazy-load</b> — доод талын зургийг гүйлгэх үед л ачаалах.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== 04 OFF-PAGE ===================== -->
+<section id="offpage" style="background:var(--ink);position:relative">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num" style="background:linear-gradient(135deg,var(--gold),#c9862a)">04</div>
+      <div>
+        <h2 style="color:#fff">Вэбээс гадуурх (Off-page) стратеги</h2>
+        <p style="color:#B9C4DE">Зөвхөн сайтаа янзлаад Google-ийн эхэнд гарахгүй. Гадны эх сурвалж дээрх дурдагдал, итгэл, эрэлт нь эрэмбэд хамгийн их нөлөөлдөг. Технологийн засвартай <b>зэрэгцүүлж</b> хийх ажлууд:</p>
+      </div>
+    </div>
+    <div class="off-grid">
+      <div class="off rv">
+        <span class="tag free">Free</span>
+        <div class="ic" style="background:linear-gradient(135deg,#00aa6c,#008857)">⭐</div>
+        <h3>Review платформ идэвхжүүлэх</h3>
+        <p>TripAdvisor, Google Business, Booking зэрэг аяллын сэтгэгдлийн платформ дээр Juulchin өөрөө профайл, мэдээлэл оруулдаггүй. Профайл нээж, жуулчдаас үнэлгээ авах нь итгэл ба backlink аль алийг өгнө.</p>
+      </div>
+      <div class="off rv">
+        <span class="tag free">Free</span>
+        <div class="ic" style="background:linear-gradient(135deg,#e1306c,#c13584)">📸</div>
+        <h3>Инфлюэнсер хамтрал</h3>
+        <p>Аялал, lifestyle инфлюэнсерүүдтэй хамтарч контент гаргах. Тэдний блог/пост дээрх сайтын линк ба брендийн дурдагдал органик хандалт, backlink нэмнэ.</p>
+      </div>
+      <div class="off rv">
+        <span class="tag free">Free</span>
+        <div class="ic" style="background:linear-gradient(135deg,var(--sky),#2f5fb0)">🔗</div>
+        <h3>Гадны эх сурвалжид дурдуулах</h3>
+        <p>Аяллын блог, мэдээллийн сайт, түншүүдийн вэб, лавлах платформ дээр Juulchin-ыг дурдуулах (PR, guest post). Олон эх сурвалжаас холбогдох тусам эрх мэдэл (authority) өснө.</p>
+      </div>
+      <div class="off rv">
+        <span class="tag paid">Paid</span>
+        <div class="ic" style="background:linear-gradient(135deg,var(--coral),#c73a28)">🎯</div>
+        <h3>Google Ads (шаардлагатай бол)</h3>
+        <p>Органик эрэмбэ өсөх хүртэл цаг шаардана. Тодорхой keyword дээр <b>шууд эхэнд</b> гарах шаардлагатай бол төлбөртэй Google Ads-ыг богино хугацааны шийдэл болгон ашиглаж болно.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 ROADMAP ===================== -->
+<section id="road">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num">05</div>
+      <div>
+        <h2>Тэргүүлэх дараалал</h2>
+        <p>Хамгийн бага хүчээр хамгийн их үр дүн өгөх ажлаас эхэлж, off-page стратегид шилжих санал.</p>
+      </div>
+    </div>
+    <div class="road">
+      <div class="step rv">
+        <div class="knob" style="background:var(--steppe)">1</div>
+        <div class="body">
+          <div class="top"><h3>Google-SEO талбарын тохиргоо засах</h3><span class="when">Хурдан · өндөр үр дүн</span></div>
+          <p>Бүх блогийн Тайлбар талбарыг <b>Content</b>-аас авдаг болгож жигдлэх + SERP урьдчилан харах интерфэйс нэмэх.</p>
+        </div>
+      </div>
+      <div class="step rv">
+        <div class="knob" style="background:var(--steppe)">2</div>
+        <div class="body">
+          <div class="top"><h3>Alt текст + зургийн оптимизаци</h3><span class="when">Хурдан</span></div>
+          <p>SIRO дээр alt текст талбар нээх, upload үед автомат resize/compress + lazy-load нэмэх.</p>
+        </div>
+      </div>
+      <div class="step rv">
+        <div class="knob" style="background:var(--gold)">3</div>
+        <div class="body">
+          <div class="top"><h3>Жижиг on-page засвар</h3><span class="when">Дунд</span></div>
+          <p>Title-ыг ~60 тэмдэгт болгох, дотоод линкийн anchor цэгцлэх, bold/strong нэмэх, social meta тохируулах.</p>
+        </div>
+      </div>
+      <div class="step rv">
+        <div class="knob" style="background:var(--gold)">4</div>
+        <div class="body">
+          <div class="top"><h3>Контент + keyword талбар</h3><span class="when">Тогтмол</span></div>
+          <p>Блогийн тоог тогтмол нэмэх, харагдах keyword/tag талбар + schema разметка хэрэгжүүлэх.</p>
+        </div>
+      </div>
+      <div class="step rv">
+        <div class="knob" style="background:var(--coral)">5</div>
+        <div class="body">
+          <div class="top"><h3>Off-page & Ads</h3><span class="when">Урт хугацаа</span></div>
+          <p>Review платформ, инфлюэнсер, PR дурдагдал идэвхжүүлэх. Шаардлагатай бол Google Ads.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 FINAL ===================== -->
+<section id="final">
+  <div class="wrap">
+    <div class="final rv">
+      <h2>Чухал сануулга: SEO нь баталгаа биш, харин үйл явц</h2>
+      <p>Техникийн суурь SEO нь Juulchin.com дээр аль хэдийн зөв ажиллаж байна. Эдгээр засварыг хийсэн ч <b>Google-ийн илэрцийн эхэнд шууд гарна гэсэн баталгаа байхгүй</b> — эрэмбэ нь контентын чанар, гадны итгэл, эрэлт болон өрсөлдөгчдөөс хамаарч цаг хугацаанд бүрддэг.</p>
+      <div class="kbox">
+        <div class="k"><div class="kt">Эхлээд шалга</div><p>Аливаа өөрчлөлтийн өмнө/дараа SEO Pro extension-ээр title, description, indexable зэргийг шалгах.</p></div>
+        <div class="k"><div class="kt">Технологи = суурь</div><p>Тохиргоо, alt текст, зураг, хурд — эдгээр нь заавал хийх суурь. Гэхдээ ганцаараа хангалтгүй.</p></div>
+        <div class="k"><div class="kt">Off-page = өсөлт</div><p>Гадны дурдагдал, review, инфлюэнсер, эрэлт нэмэгдэх нь жинхэнэ эрэмбийн өсөлтийг авчирна.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p><b>Juulchin.com SEO аудит</b> · Эх сурвалж: Seobility.net, SEO Pro (MarketingSyrup), SIRO платформ · 2026-07-24</p>
+</footer>
+
+<script>
+  // stars
+  (function(){
+    const s=document.getElementById('stars');if(!s)return;
+    for(let i=0;i<60;i++){const d=document.createElement('i');
+      d.style.left=Math.random()*100+'%';d.style.top=Math.random()*100+'%';
+      d.style.animationDelay=(Math.random()*4)+'s';s.appendChild(d);}
+  })();
+
+  // SERP toggle
+  function setSerp(src,btn){
+    document.querySelectorAll('.serp-toggles .tg').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    const desc=document.getElementById('serpDesc'), note=document.getElementById('serpNote');
+    if(src==='content'){
+      desc.textContent="After two flights and a Hong Kong layover, I find myself landing at Chinggis Khaan International Airport. Ulaanbaatar's new airport opened in 2021…";
+      desc.style.color="#4d5156";
+      note.innerHTML="✓ Content-аас авбал бодит блогийн текст илэрцэд гарч, хэрэглэгч юу байгааг ойлгоно.";
+    }else{
+      desc.textContent="Arriving in Mongolia — Juulchin";
+      desc.style.color="#b04a3a";
+      note.innerHTML="✗ title-аас авбал гарчиг давхардаж, description хоосорч, Google контентоо зөв танихгүй.";
+    }
+  }
+
+  // reveal + counters + bars
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      e.target.classList.add('in');
+      // bars
+      e.target.querySelectorAll('.bar-fill').forEach(b=>{setTimeout(()=>b.style.width=b.dataset.w+'%',120)});
+      // main arc
+      const arc=e.target.querySelector('#mainarc');
+      if(arc){const c=540, pct=81; setTimeout(()=>arc.style.transition='stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)',50);
+        setTimeout(()=>arc.style.strokeDashoffset=c-(c*pct/100),120);}
+      // counters
+      e.target.querySelectorAll('[data-count]').forEach(el=>{
+        const end=+el.dataset.count; let cur=0; const step=Math.max(1,end/60);
+        const t=setInterval(()=>{cur+=step; if(cur>=end){cur=end;clearInterval(t)}
+          el.textContent=Math.round(cur).toLocaleString('en-US');},18);
+      });
+      io.unobserve(e.target);
+    });
+  },{threshold:.2});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
