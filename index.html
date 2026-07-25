@@ -6,7 +6,7 @@
 <title>Juulchin.com — SEO Аудит ба Техникийн Зөвлөмж</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#0C1633; --ink2:#14224A; --ink3:#1E3266;
@@ -18,13 +18,13 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:'Manrope',system-ui,sans-serif;
+    font-family:'Inter','Noto Sans','Manrope',system-ui,sans-serif;
     background:var(--paper); color:var(--slate);
     line-height:1.6; -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-  h1,h2,h3,.disp{font-family:'Unbounded',sans-serif;letter-spacing:-.01em}
+  h1,h2,h3,.disp{font-family:'Inter','Noto Sans',sans-serif;letter-spacing:-0.02em}
   .mono{font-family:'JetBrains Mono',monospace}
 
   /* ---------- HERO ---------- */
@@ -209,11 +209,72 @@
     .sec-head{gap:14px}
     .final{padding:32px 24px}
   }
+  /* ---------- COMPETITOR COMPARISON ---------- */
+  .cmp-wrap{overflow-x:auto;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow-sm);background:var(--card)}
+  .cmp{width:100%;border-collapse:collapse;min-width:720px}
+  .cmp th,.cmp td{padding:15px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:middle}
+  .cmp thead th{background:var(--ink);color:#fff;font-family:'Manrope';font-weight:700;font-size:12.5px;letter-spacing:.02em;border-bottom:none}
+  .cmp thead th:first-child{border-top-left-radius:0}
+  .cmp .site{font-weight:800;color:var(--ink);white-space:nowrap}
+  .cmp .dom{font-family:'JetBrains Mono';font-size:12.5px;color:#3a4152}
+  .cmp .dom b{color:var(--steppe);background:#E4F5EC;padding:1px 5px;border-radius:5px}
+  .cmp .yes{color:var(--steppe);font-weight:800}
+  .cmp .no{color:var(--coral);font-weight:800}
+  .cmp tr.us{background:#FFF8EC}
+  .cmp tr.us .site{color:#8a6410}
+  .cmp tr:last-child td{border-bottom:none}
+  .cmp .mini{font-size:12px;color:var(--muted)}
+
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+  .why{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-sm);position:relative}
+  .why .wn{font-family:'Unbounded';font-weight:800;font-size:13px;color:#fff;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px}
+  .why h3{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px}
+  .why p{font-size:13.5px;color:#3a4152}
+
+  .opt{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow-sm);margin-bottom:16px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+  .opt h3{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px}
+  .opt p{font-size:13.5px;color:#3a4152}
+  .opt .ex{font-family:'JetBrains Mono';font-size:12.5px;background:#F3F1EA;padding:3px 8px;border-radius:6px;color:var(--ink3);display:inline-block;margin-top:8px}
+  .risk{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:999px;white-space:nowrap;height:fit-content}
+  .risk.low{background:#E4F5EC;color:var(--steppe)}
+  .risk.mid{background:#FFF3DA;color:#a9791b}
+  .risk.high{background:#FDECE9;color:var(--coral)}
+  .opt.rec{border-color:#B7E3CB;background:#F5FCF8}
+
+  @media(max-width:860px){.why-grid{grid-template-columns:1fr}.opt{grid-template-columns:1fr}}
+
   @media(prefers-reduced-motion:reduce){
     .rv{opacity:1;transform:none;transition:none}
     .stars i{animation:none}
     .bar-fill{transition:none}
   }
+
+.hero{
+background:
+radial-gradient(circle at top right,#4667c8 0%,#1b3168 35%,#0c1633 100%) !important;
+}
+.panel,.tcard,.off,.score-top,.why,.opt,.final{
+backdrop-filter:blur(8px);
+}
+.panel:hover,.tcard:hover,.off:hover,.why:hover,.opt:hover{
+transform:translateY(-4px);
+transition:.25s ease;
+box-shadow:0 24px 50px rgba(12,22,51,.16);
+}
+h1,h2,h3{
+line-height:1.18!important;
+}
+p,li{
+font-size:15px!important;
+line-height:1.8!important;
+}
+.sec-head p{
+font-size:16px!important;
+}
+body{
+text-rendering:optimizeLegibility;
+}
+
 </style>
 </head>
 <body>
@@ -224,7 +285,7 @@
   <div class="wrap">
     <span class="eyebrow">SEO Аудит · Дижитал Инновац</span>
     <h1>Juulchin.com сайтын <b>SEO аудит</b> ба техникийн зөвлөмж</h1>
-    <p class="lead">Seobility болон SEO Pro (MarketingSyrup) хэрэгслээр хийсэн аудитын дүн, түүнчлэн технологийн багаас засаж болох бодит ажлууд, вэбээс гадуурх (off-page) стратегийн санал.</p>
+    <p class="lead">Seobility болон SEO Pro (MarketingSyrup) хэрэгслээр хийсэн аудитын дүн, мөн технологийн багаас хэрэгжүүлэх боломжтой ажлууд болон вэбээс гадуурх (off-page) стратегийн зөвлөмжүүд.</p>
     <div class="hero-meta">
       <span class="chip"><span class="dot" style="background:var(--gold)"></span> juulchin.com</span>
       <span class="chip"><span class="dot" style="background:var(--steppe)"></span> Аудит: 2026-07-24</span>
@@ -289,7 +350,7 @@
       <div class="sec-num">02</div>
       <div>
         <h2>Аудитын дүгнэлт</h2>
-        <p>Техникийн суурь тохиргоо (SEO) нь ерөнхийдөө зөв ажиллаж байна. Гол сул тал нь линкийн бүтэц, зургийн alt текст, контентийн хэмжээ болон гарчгийн урттай холбоотой.</p>
+        <p>SEO-ийн техникийн суурь тохиргоо ерөнхийдөө зөв хийгдсэн байна. Гол сул тал нь линкийн бүтэц, зургийн alt текст, контентийн хэмжээ болон гарчгийн урттай холбоотой.</p>
       </div>
     </div>
     <div class="split">
@@ -308,13 +369,13 @@
       <div class="panel rv">
         <h3><span class="badge" style="background:var(--coral)">!</span> Анхаарах тал</h3>
         <ul class="lst bad">
-          <li><b>Title 70 тэмдэгт</b> — зөвшөөрөгдөх урт (≈580px / ~60 тэмдэгт)-ээс хэтэрсэн, төгсгөл нь Google дээр таслагдаж мэднэ.</li>
+          <li><b>Title 70 тэмдэгт</b> — зөвшөөрөгдөх урт (≈580px / ~60 тэмдэгт)-ээс хэтэрсэн, төгсгөл нь Google-ийн хайлтын үр дүнд таслагдаж болзошгүй.</li>
           <li><b>Линкийн бүтэц 25%</b> — зарим дотоод anchor хэт урт, dynamic параметртэй.</li>
-          <li><b>Зургийн alt текст дутуу</b> — хэсэг зургууд alt attribute-гүй (Image SEO).</li>
+          <li><b>Зургийн alt текст дутуу</b> — хэсэг зургууд alt attribute-гүй (Зургийн SEO).</li>
           <li><b>Гарчгийн дараалал</b> — 46 гарчиг, текстийн хэмжээтэй харьцуулахад дэс дараалал сайжруулах шаардлагатай.</li>
           <li><b>Bold/strong цөөн</b> — ердөө 5 (санал болгох нь ~30).</li>
           <li><b>Social media 1</b> — нийгмийн сүлжээнд тохируулга дутуу.</li>
-          <li><b>Блог маш цөөн</b> — SIRO дээр ердөө 6 блог.</li>
+          <li><b>Блогийн тоо цөөн</b> — SIRO дээр ердөө 6 блог.</li>
         </ul>
       </div>
     </div>
@@ -327,8 +388,8 @@
     <div class="sec-head rv">
       <div class="sec-num">03</div>
       <div>
-        <h2>Технологийн багаас засаж болох ажлууд</h2>
-        <p>Аудитын илэрцийг тодорхой асуудал → техникийн шийдэл болгон задаллаа. Эдгээр нь SIRO платформ дээр хийгдэх бодит хөгжүүлэлтүүд.</p>
+        <h2>Технологийн багаас хэрэгжүүлэх боломжтой ажлууд</h2>
+        <p>Аудитын илэрцийг тодорхой асуудал → техникийн шийдэл болгон задаллаа. Эдгээрийг SIRO платформ дээр хэрэгжүүлэх боломжтой хөгжүүлэлтийн ажлууд юм.</p>
       </div>
     </div>
 
@@ -396,7 +457,7 @@
       <div class="tcard-body">
         <div>
           <div class="block-lbl">Санаа</div>
-          <p class="prob">Хүмүүсийн ихэвчлэн хайдаг <b>mongolia, travel, tour, gobi</b> гэх үгсийг блог болон хуудсанд нэмж, тэдгээр үгээр хайхад сайт олдох боломжийг нэмэгдүүлэх. SIRO дээр keyword оруулах тусгай талбар нээж өгч болно.</p>
+          <p class="prob">Хэрэглэгчдийн түгээмэл хайдаг <b>mongolia, travel, tour, gobi</b> гэх үгсийг блог болон хуудсанд нэмж, тэдгээр үгээр хайхад сайт илрэх боломжийг нэмэгдүүлэх. SIRO дээр keyword оруулах тусгай талбар нээж өгч болно.</p>
         </div>
         <div>
           <div class="block-lbl">Хэрэгжүүлэлт</div>
@@ -424,7 +485,7 @@
         <div class="tcard-ic" style="background:linear-gradient(135deg,var(--steppe),#1f7a51)">🖼️</div>
         <div>
           <h3>3 · Зургийн Alt текст талбар нээх</h3>
-          <div class="sub">Image SEO — одоо олон зураг alt attribute-гүй</div>
+          <div class="sub">Зургийн SEO — одоо олон зураг alt attribute-гүй</div>
         </div>
       </div>
       <div class="tcard-body">
@@ -445,7 +506,7 @@
         <div class="tcard-ic" style="background:linear-gradient(135deg,#8a5cf0,#6a3fd0)">⚡</div>
         <div>
           <h3>4 · Зургийн хэмжээ / performance оптимизаци</h3>
-          <div class="sub">WebP ашиглаж байгаа ч эх файлын хэмжээ хэт том</div>
+          <div class="sub">WebP ашиглаж байгаа ч эх файлуудын хэмжээ хэт том</div>
         </div>
       </div>
       <div class="tcard-body">
@@ -467,11 +528,153 @@
   </div>
 </section>
 
-<!-- ===================== 04 OFF-PAGE ===================== -->
+<!-- ===================== 04 ӨРСӨЛДӨГЧИЙН ХАРЬЦУУЛАЛТ ===================== -->
+<section id="compare" style="background:#FBFAF6;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-num">04</div>
+      <div>
+        <h2>Өрсөлдөгчийн харьцуулалт — яагаад тэд эхэнд гарч байна вэ?</h2>
+        <p>Google дээр <b>"mongolia travel"</b> гэж хайхад эхний илэрцүүд бүгд нэг нийтлэг шинжтэй: хайлтын түлхүүр үг нь <b>тэдний домэйн нэр болон гарчигт шууд орсон</b> байдаг. juulchin.com энэ давуу талгүй.</p>
+      </div>
+    </div>
+
+    <!-- comparison table -->
+    <div class="cmp-wrap rv">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Сайт</th>
+            <th>Домэйн</th>
+            <th>Домэйнд "mongolia"</th>
+            <th>Гарчгийн keyword</th>
+            <th>Гадаад дурдагдал / сэтгэгдэл</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="site">Discover Mongolia</td>
+            <td class="dom">discover<b>mongolia</b>.mn</td>
+            <td class="yes">✓ Тийм</td>
+            <td>Mongolia Travel &amp; Tours</td>
+            <td>TripAdvisor, МАЖХолбооны итгэмжлэл, 10+ жил</td>
+          </tr>
+          <tr>
+            <td class="site">Mongolia Tourism</td>
+            <td class="dom"><b>mongolia</b>.travel</td>
+            <td class="yes">✓✓ Яг таарсан + <span class="mini">.travel TLD</span></td>
+            <td>Mongolia Tourism</td>
+            <td>Үндэсний аялал жуулчлалын портал</td>
+          </tr>
+          <tr>
+            <td class="site">View Mongolia Travel</td>
+            <td class="dom">view<b>mongolia</b>.com</td>
+            <td class="yes">✓ Тийм</td>
+            <td>Best Mongolia Travel and Tours</td>
+            <td>Идэвхтэй тур хуудаснууд</td>
+          </tr>
+          <tr>
+            <td class="site">Mongolia Expeditions</td>
+            <td class="dom"><b>mongolia</b>-expeditions.com</td>
+            <td class="yes">✓ Тийм</td>
+            <td>Mongolia Expeditions &amp; Tours</td>
+            <td>Facebook, X, Instagram, сэтгэгдэл (100%)</td>
+          </tr>
+          <tr class="us">
+            <td class="site">Juulchin ⚑</td>
+            <td class="dom">juulchin.com</td>
+            <td class="no">✗ Үгүй</td>
+            <td>Juulchin Tourism — Discover Mongolia…</td>
+            <td>Сул — TripAdvisor/review дээр байхгүй</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- key insight -->
+    <div class="callout warn rv" style="margin-top:24px">
+      <div class="ci">🔎</div>
+      <div>
+        <h4>"Juulchin" гэдэг үг өөрөө "жуулчин / tourist" гэсэн утгатай — гэвч зөвхөн монголоор</h4>
+        <p>Brand хувьд хүчтэй (1954 оноос хойшх өв, "juulchin" гэж шууд хайвал эхэнд гарна), гэхдээ англиар <b>"mongolia travel"</b> гэж хайж буй гадаад жуулчинд "juulchin" гэдэг тэмдэгт нь "mongolia" ч биш, "travel" ч биш — утгын холбоо алга. Тиймээс шинэ хэрэглэгч танайхыг олж мэдэхэд хэцүү.</p>
+      </div>
+    </div>
+
+    <!-- why they rank -->
+    <h3 class="disp rv" style="font-size:20px;color:var(--ink);margin:34px 0 4px">Тэд яагаад эрэмбэлэгддэг вэ? — 3 хүчин зүйл</h3>
+    <div class="why-grid rv">
+      <div class="why">
+        <div class="wn" style="background:linear-gradient(135deg,var(--sky),#2f5fb0)">01</div>
+        <h3>Keyword хамаарал</h3>
+        <p>Домэйн + гарчиг + контентод "mongolia", "travel", "tour" үгс шингэсэн тул Google хайлттай <b>сэдвийн хувьд шууд таарна</b> гэж үзнэ. (Тайлбар: exact-match домэйн 2012 оноос хойш нөлөө нь суларсан ч гарчиг/контент дахь keyword одоо ч чухал.)</p>
+      </div>
+      <div class="why">
+        <div class="wn" style="background:linear-gradient(135deg,var(--steppe),#1f7a51)">02</div>
+        <h3>Гадаад итгэл (authority)</h3>
+        <p>TripAdvisor итгэмжлэл, сэтгэгдэл, Facebook/Instagram идэвх, бусад сайтаас холбогдсон линк — эдгээр нь Google-д <b>"итгэж болох, бодит"</b> бизнес гэсэн дохио өгнө.</p>
+      </div>
+      <div class="why">
+        <div class="wn" style="background:linear-gradient(135deg,var(--gold),#c9862a)">03</div>
+        <h3>Контентын гүн</h3>
+        <p>Олон тур хуудас, блог, аяллын хөтөлбөр, FAQ — өргөн контент нь олон төрлийн хайлтад тохирч, сайтыг <b>сэдвийн эксперт</b> гэж танигдуулна. juulchin дээр ердөө 6 блог.</p>
+      </div>
+    </div>
+
+    <!-- branding / domain recommendations -->
+    <h3 class="disp rv" style="font-size:20px;color:var(--ink);margin:40px 0 16px">Брэндинг / домэйны боломжит зөвлөмж</h3>
+
+    <div class="opt rec rv">
+      <div>
+        <h3>А · Брэнд + keyword хосолсон metadata <span style="font-size:11px;color:var(--steppe);font-weight:800">★ Санал болгож буй</span></h3>
+        <p>Компанийн нэр, домэйныг <b>хэвээр хадгалаад</b> (1954 оны өв бол үнэ цэнэтэй актив), гарчиг / H1 / meta / контентод keyword-оо шингээх. Хамгийн бага зардал, эрсдэлгүй, хамгийн үр дүнтэй.</p>
+        <span class="ex">Juulchin — Mongolia Travel &amp; Tours Since 1954</span>
+      </div>
+      <span class="risk low">Эрсдэл бага</span>
+    </div>
+
+    <div class="opt rv">
+      <div>
+        <h3>Б · URL slug / хуудасны бүтэц keyword-жүүлэх</h3>
+        <p>Дэд хуудсуудын хаяг, гарчгийг тодорхой keyword рүү чиглүүлэх. Одоогийн домэйн дотор ажиллана.</p>
+        <span class="ex">juulchin.com/mongolia-tours · /gobi-desert-travel</span>
+      </div>
+      <span class="risk low">Эрсдэл бага</span>
+    </div>
+
+    <div class="opt rv">
+      <div>
+        <h3>В · Keyword-тэй маркетингийн (кампанит) домэйн</h3>
+        <p>Тодорхой кампанит ажилд зориулж keyword-тэй туслах домэйн авч, canonical/301-ээр үндсэн сайт руу холбох. Брэнд хуваагдах эрсдэлтэй тул болгоомжтой.</p>
+        <span class="ex">mongolia-travel-juulchin.com → juulchin.com</span>
+      </div>
+      <span class="risk mid">Эрсдэл дунд</span>
+    </div>
+
+    <div class="opt rv">
+      <div>
+        <h3>Г · Домэйн бүрэн солих / rebrand</h3>
+        <p>Домэйныг keyword-тэй болгож бүрэн солих. <b>1954 оноос хуримтлагдсан брэнд, backlink, одоо байгаа эрэмбийг алдах</b> өндөр эрсдэлтэй. Зөвхөн маш нягт 301-redirect шилжилттэйгээр, стратегийн шийдвэрээр л авч үзэх.</p>
+        <span class="ex">Зөвлөмж: одоогоор бүү сонго</span>
+      </div>
+      <span class="risk high">Эрсдэл өндөр</span>
+    </div>
+
+    <div class="callout info rv" style="margin-top:8px">
+      <div class="ci">🧭</div>
+      <div>
+        <h4>Дүгнэлт</h4>
+        <p>Өрсөлдөгчид зөвхөн домэйнд "mongolia" байснаараа эхэнд гараагүй — <b>keyword хамаарал + гадаад итгэл + контентын гүн</b> гурвын нийлбэрээр гарсан. Тиймээс домэйноо солихоос илүү, <b>А хувилбар (metadata) + off-page идэвх (дараагийн хэсэг)</b> нь Juulchin-д хамгийн үр дүнтэй, аюулгүй зам.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== 05 OFF-PAGE ===================== -->
 <section id="offpage" style="background:var(--ink);position:relative">
   <div class="wrap">
     <div class="sec-head rv">
-      <div class="sec-num" style="background:linear-gradient(135deg,var(--gold),#c9862a)">04</div>
+      <div class="sec-num" style="background:linear-gradient(135deg,var(--gold),#c9862a)">05</div>
       <div>
         <h2 style="color:#fff">Вэбээс гадуурх (Off-page) стратеги</h2>
         <p style="color:#B9C4DE">Зөвхөн сайтаа янзлаад Google-ийн эхэнд гарахгүй. Гадны эх сурвалж дээрх дурдагдал, итгэл, эрэлт нь эрэмбэд хамгийн их нөлөөлдөг. Технологийн засвартай <b>зэрэгцүүлж</b> хийх ажлууд:</p>
@@ -506,14 +709,14 @@
   </div>
 </section>
 
-<!-- ===================== 05 ROADMAP ===================== -->
+<!-- ===================== 06 ROADMAP ===================== -->
 <section id="road">
   <div class="wrap">
     <div class="sec-head rv">
-      <div class="sec-num">05</div>
+      <div class="sec-num">06</div>
       <div>
-        <h2>Тэргүүлэх дараалал</h2>
-        <p>Хамгийн бага хүчээр хамгийн их үр дүн өгөх ажлаас эхэлж, off-page стратегид шилжих санал.</p>
+        <h2>Хэрэгжүүлэх дараалал</h2>
+        <p>Хамгийн бага хүчээр хамгийн өндөр үр өгөөжтэй ажлаас эхэлж, off-page стратегид шилжих санал.</p>
       </div>
     </div>
     <div class="road">
@@ -534,8 +737,8 @@
       <div class="step rv">
         <div class="knob" style="background:var(--gold)">3</div>
         <div class="body">
-          <div class="top"><h3>Жижиг on-page засвар</h3><span class="when">Дунд</span></div>
-          <p>Title-ыг ~60 тэмдэгт болгох, дотоод линкийн anchor цэгцлэх, bold/strong нэмэх, social meta тохируулах.</p>
+          <div class="top"><h3>Брэнд + keyword metadata + жижиг засвар</h3><span class="when">Дунд</span></div>
+          <p>Гарчиг/H1-ийг <b>"Juulchin — Mongolia Travel &amp; Tours"</b> хэлбэрээр keyword-жүүлж ~60 тэмдэгтэд багтаах, URL slug-ийг сэдвээр цэгцлэх, дотоод линкийн anchor, bold/strong, social meta тохируулах.</p>
         </div>
       </div>
       <div class="step rv">
@@ -560,8 +763,8 @@
 <section id="final">
   <div class="wrap">
     <div class="final rv">
-      <h2>Чухал сануулга: SEO нь баталгаа биш, харин үйл явц</h2>
-      <p>Техникийн суурь SEO нь Juulchin.com дээр аль хэдийн зөв ажиллаж байна. Эдгээр засварыг хийсэн ч <b>Google-ийн илэрцийн эхэнд шууд гарна гэсэн баталгаа байхгүй</b> — эрэмбэ нь контентын чанар, гадны итгэл, эрэлт болон өрсөлдөгчдөөс хамаарч цаг хугацаанд бүрддэг.</p>
+      <h2>Чухал сануулга: SEO нь нэг удаагийн ажил биш, тасралтгүй үйл явц</h2>
+      <p>Техникийн суурь SEO нь Juulchin.com дээр аль хэдийн зөв ажиллаж байна. Эдгээр сайжруулалтыг хэрэгжүүлсэн ч <b>Google-ийн хайлтын үр дүнд шууд эхэнд эрэмбэлэгдэнэ гэсэн баталгаа байхгүй</b> — эрэмбэ нь контентын чанар, гадны итгэл, эрэлт болон өрсөлдөгчдөөс хамаарч цаг хугацаанд бүрддэг.</p>
       <div class="kbox">
         <div class="k"><div class="kt">Эхлээд шалга</div><p>Аливаа өөрчлөлтийн өмнө/дараа SEO Pro extension-ээр title, description, indexable зэргийг шалгах.</p></div>
         <div class="k"><div class="kt">Технологи = суурь</div><p>Тохиргоо, alt текст, зураг, хурд — эдгээр нь заавал хийх суурь. Гэхдээ ганцаараа хангалтгүй.</p></div>
